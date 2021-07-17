@@ -36,9 +36,9 @@ C03 = 2.4e-12
 C04 = 2.4e-12
 C3 = 2.7e-12
 C4 = 1e-12
-CD1 = 3.55e-12 # Varactor capacitance
+CD1 = 5.75e-12 # Varactor capacitance
 
-Cn = (C3+C03)*(C4*C04)/(C3+C03+C4+C04)
+Cn = ((C3+C03)*(C4+C04))/(C3+C03+C4+C04)
 Cn_forma = formatter(Cn) 
 
 print("Cn :", Cn)       
@@ -52,7 +52,9 @@ print("Frecuencia resultante :", fo_forma)
 
 CD_sy = symbols('CD_sy')
 CD_equation = Eq(-1 + f*(2*m.pi*sqrt(L1*(Cstray+(C17*CD_sy/(C17+CD_sy))+C6+(C5*Cn/(C5+Cn))))))
-solu = solve(CD_equation)
+
+
+solu = solve(CD_equation, force = True)
 CD_value = solu[0]
 CD_value_forma = formatter(CD_value)
 print("Valor exacto del varactor para 900Mhz: ", CD_value)
