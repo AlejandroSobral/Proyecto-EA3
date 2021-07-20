@@ -21,6 +21,7 @@ print("Frecuencia buscada: ", f_forma)
 
 L1 = 5e-9 #Datasheet
 Q = 140 #Datasheet
+gm = 18e-3
 
 Rp = Q*2*m.pi*f*L1
 
@@ -41,7 +42,7 @@ CD1 = 5.75e-12 # Varactor capacitance
 Cn = ((C3+C03)*(C4+C04))/(C3+C03+C4+C04)
 Cn_forma = formatter(Cn) 
 
-print("Cn :", Cn)       
+#print("Cn :", Cn)       
 print("Cn :", Cn_forma)
 
 fo = 1/(2*m.pi*sqrt(L1*(Cstray+(C17*CD1/(C17+CD1))+C6+(C5*Cn/(C5+Cn)))))
@@ -59,6 +60,14 @@ CD_value = solu[0]
 CD_value_forma = formatter(CD_value)
 print("Valor exacto del varactor para 900Mhz: ", CD_value)
 
+print("Con este valor, se evalúa el varactor correspondiente.")
+
+
+print("Se calcula el valor de la resistencia que presenta el puerto de entrada del tanque del MAX")
+
+Rn = gm*(1/(2*m.pi*f*(C3+C03)*(2*m.pi*f*(C4+C04))))
+Rn_f = formatter(Rn)
+print("Rn :", Rn_f)
 # solu_f = formatter(solu)
 # print("Varactor resultante :", solu_f)
 
